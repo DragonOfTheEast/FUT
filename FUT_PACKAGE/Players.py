@@ -10,11 +10,10 @@ class Player:
         self.nation = nation
         self.league = league
         self.team = team
-        self.links = {}
-
+        self.links = [] ##(player, link value)
     def calculate_chem(self, links):
         pass
 
     def __str__(self):
-        return " ".join([self.name, self.pos, self.nation, self.league, self.team])
+        return " ".join([self.pos, self.nation, self.league, self.team])
 
