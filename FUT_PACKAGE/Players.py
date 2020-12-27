@@ -5,15 +5,17 @@ positions = {}
 
 
 class Player:
-    def __init__(self,pos, nation,league,team):
+    def __init__(self, pos, playing_pos, nation,league,team):
+        self.playing_pos = playing_pos
         self.pos = pos
         self.nation = nation
         self.league = league
-        self.team = team
+        self.club = team
         self.links = [] ##(player, link value)
-    def calculate_chem(self, links):
+        self.chem = None
+    def calculate_chem(self):
         pass
 
     def __str__(self):
-        return " ".join([self.pos, self.nation, self.league, self.team])
+        return " ".join([self.pos, self.playing_pos, self.nation, self.league, self.team])
 
