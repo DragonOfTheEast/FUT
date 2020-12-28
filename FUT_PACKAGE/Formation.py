@@ -4,6 +4,7 @@ import os
 dir = os.path.dirname(__file__)
 class Formation:
     def __init__(self, name):
+        self.team_chem = 0
         self.players = [None] * 11
         self.name = name
         file_path = os.path.join(dir, "Formations/" + name + ".in")
@@ -17,8 +18,6 @@ class Formation:
                 self.key[line[0]] = (count, line[1:])
                 count += 1
         file.close()
-
-
     def put_players_from_file(self, filename):
         file = open(os.path.join(dir, filename), "r")
         for line in file:
@@ -45,12 +44,14 @@ class Formation:
                 self.players[i].links.append((self.players[self.key[j][0]], chem))
         for i in self.players:
             i.calculate_chem()
-            print(i)
-        # for line in file:
-        #     playing_pos = line.split(',')[1]
-        #     temp = line.split(',')
-        #     self.formation[self.key[playing_pos][0]] = Player(temp[0], temp[1], temp[2], temp[3], temp[4])
 
+            self.team_chem += i.chem
+
+
+    # def get_team_chem(self):
+    #
+    #
+    #     return sum([i.chem for i in self.players])
     def __str__(self):
         ret = ""
         for i in self.key:
@@ -62,4 +63,6 @@ class Formation:
 
 test = Formation("433")
 test.put_players_from_file("test.in")
+
+print(test.team_chem)
 

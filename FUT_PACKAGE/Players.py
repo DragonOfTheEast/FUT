@@ -35,41 +35,42 @@ class Player:
         self.chem = None
     def calculate_chem(self):
         val = sum([i[1] for i in self.links])/ len(self.links)
-
-
         try:
             temp = lowest_positions[simplified_positions[self.pos]]
-
         except KeyError:
             temp = lowest_positions[self.pos]
 
-
         try:
-            playin_temp = lowest_positions[simplified_positions[self.playing_pos]]
+            playin_temp = simplified_positions[self.playing_pos]
         except KeyError:
-            playin_temp = lowest_positions[self.playing_pos]
+            playin_temp = self.playing_pos
+
+
         if val >= 1:
-            if temp == playin_temp or temp in positions[playin_temp]:
+            if temp == lowest_positions[playin_temp] or temp in positions[playin_temp]:
                 self.chem = FULL_CHEM
-            elif playin_temp in alternate_positions[temp]:
+            elif playin_temp in alternate_positions[temp] or lowest_positions[playin_temp] in alternate_positions[temp]:
+                # print("heeeee")
                 self.chem = OUT_OF_POSITION
             else:
                 self.chem = THREE_CHEM
         elif 0.3 <= val < 1:
             if temp == playin_temp or temp in positions[playin_temp]:
                 self.chem = STILL_GOOD
-            elif playin_temp in alternate_positions[temp]:
+            elif playin_temp in alternate_positions[temp] or lowest_positions[playin_temp] in alternate_positions[
+                    temp]:
                 self.chem = OKAY_CHEM
             else:
                 self.chem = TWO_CHEM
         elif val < 0.3:
             if temp == playin_temp or temp in positions[playin_temp]:
                 self.chem = OKAY_CHEM
-            elif playin_temp in alternate_positions[temp]:
+            elif playin_temp in alternate_positions[temp] or lowest_positions[playin_temp] in alternate_positions[
+                    temp]:
                 self.chem = TWO_CHEM
             else:
                 self.chem = NO_CHEM
-
+        print(self, val, playin_temp, temp)
 
     def __str__(self):
         return "-".join([self.pos, self.playing_pos, self.nation, self.league, self.club, str(self.chem)])
