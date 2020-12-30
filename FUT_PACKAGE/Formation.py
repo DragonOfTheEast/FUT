@@ -62,7 +62,7 @@ class Formation:
 
 
 test = Formation("433")
-test.put_players_from_file("test.in")
+test.put_players_from_file("test2.in")
 
 print(test.team_chem)
 
