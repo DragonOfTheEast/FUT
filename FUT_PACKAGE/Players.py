@@ -55,6 +55,8 @@ class Player:
             else:
                 self.chem = THREE_CHEM
         elif 0.3 <= val < 1:
+            # for i in self.links:
+            #     print(i[0].playing_pos, i[1])
             if temp == playin_temp or temp in positions[playin_temp]:
                 self.chem = STILL_GOOD
             elif playin_temp in alternate_positions[temp] or lowest_positions[playin_temp] in alternate_positions[
