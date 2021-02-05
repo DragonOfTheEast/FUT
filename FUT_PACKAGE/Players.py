@@ -77,3 +77,4 @@ class Player:
     def __str__(self):
         return "-".join([self.pos, self.playing_pos, self.nation, self.league, self.club, str(self.chem)])
 
+
